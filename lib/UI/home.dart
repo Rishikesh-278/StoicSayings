@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
-import '../Authentication/authentication.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stoicsayings/components/drawer.dart';
+import 'package:http/http.dart' as http;
+import '../bloc/ApiCall.dart';
+import '../bloc/ApiCallState.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -10,39 +12,48 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text("HomePage"),
-        ),
-        drawer: Drawer(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              const SizedBox(height: 50),
-              CircleAvatar(
-                radius: 50,
-                backgroundImage:
-                    NetworkImage(FirebaseAuth.instance.currentUser!.photoURL!),
-              ),
-              Text(
-                FirebaseAuth.instance.currentUser!.displayName!,
-                style: const TextStyle(fontSize: 20),
-              ),
-              TextButton(
-                onPressed: () {
-                  Authentication().signOut();
-                },
-                style: TextButton.styleFrom(backgroundColor: Colors.blueAccent),
-                child: const Text(
-                  "Log Out",
-                  style: TextStyle(color: Colors.black, fontSize: 15),
-                ),
-              ),
-            ],
+      child: BlocProvider(
+        create: (context) => MyBloc(),
+        child: Scaffold(
+          appBar: AppBar(
+            title: const Text("HomePage"),
+            centerTitle: true,
+            leading: Builder(
+              builder: (BuildContext context) {
+                return GestureDetector(
+                  child: CircleAvatar(
+                    radius: 1,
+                    backgroundImage: NetworkImage(
+                        FirebaseAuth.instance.currentUser!.photoURL!),
+                  ),
+                  onTap: () {
+                    Scaffold.of(context).openDrawer();
+                  },
+                );
+              },
+            ),
           ),
-        ),
-        body: Column(
-          children: const <Widget>[Text("This is your home page")],
+          drawer: drawer(),
+          body: RefreshIndicator(
+            onRefresh: () async {
+              context.read<MyBloc>().add(MyApiCallEvent());
+            },
+            child: ListView(
+              children: <Widget>[
+                const SizedBox(
+                  height: 10,
+                ),
+                Container(
+                    height: 150,
+                    margin: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      border: Border.all(width: 1, color: Colors.white),
+                      borderRadius: const BorderRadius.all(Radius.circular(10)),
+                    ),
+                    child: const Text("")),
+              ],
+            ),
+          ),
         ),
       ),
     );
