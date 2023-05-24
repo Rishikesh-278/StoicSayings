@@ -15,16 +15,22 @@ class Home extends StatelessWidget {
       child: BlocProvider(
         create: (context) => MyBloc(),
         child: Scaffold(
+          backgroundColor: Color(0xFF141414),
           appBar: AppBar(
+            backgroundColor: Color(0xFF141414),
             title: const Text("HomePage"),
             centerTitle: true,
+            elevation: 0,
             leading: Builder(
               builder: (BuildContext context) {
                 return GestureDetector(
-                  child: CircleAvatar(
-                    radius: 1,
-                    backgroundImage: NetworkImage(
-                        FirebaseAuth.instance.currentUser!.photoURL!),
+                  child: Container(
+                    margin: const EdgeInsets.all(10),
+                    child: CircleAvatar(
+                      radius: 0.1,
+                      backgroundImage: NetworkImage(
+                          FirebaseAuth.instance.currentUser!.photoURL!),
+                    ),
                   ),
                   onTap: () {
                     Scaffold.of(context).openDrawer();

@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: themeData,
+      theme: ThemeData(useMaterial3: true),
       home: Authentication().handleAuthState(),
     );
   }
