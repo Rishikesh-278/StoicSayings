@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'Authentication/authentication.dart';
 import 'Authentication/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import 'bloc/ApiCall.dart';
 
 Future<void> main() async {
@@ -19,18 +18,15 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   MyApp({super.key});
 
-  final ThemeData themeData = ThemeData(
-    appBarTheme: const AppBarTheme(
-      color: Color(0xFF141414),
-    ),
-    scaffoldBackgroundColor: const Color(0xFF141414),
-  );
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(useMaterial3: true),
+      theme: ThemeData(
+        fontFamily: "WorkSans",
+        useMaterial3: true,
+        brightness: Brightness.dark,
+      ),
       home: Authentication().handleAuthState(),
     );
   }

@@ -7,7 +7,7 @@ import '../bloc/ApiCall.dart';
 import '../bloc/ApiCallState.dart';
 
 class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+  Home({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +15,11 @@ class Home extends StatelessWidget {
       child: BlocProvider(
         create: (context) => MyBloc(),
         child: Scaffold(
-          backgroundColor: Color(0xFF141414),
           appBar: AppBar(
-            backgroundColor: Color(0xFF141414),
-            title: const Text("HomePage"),
+            title: const Text(
+              "HomePage",
+              style: TextStyle(fontSize: 30),
+            ),
             centerTitle: true,
             elevation: 0,
             leading: Builder(
@@ -46,17 +47,40 @@ class Home extends StatelessWidget {
             },
             child: ListView(
               children: <Widget>[
-                const SizedBox(
-                  height: 10,
-                ),
                 Container(
-                    height: 150,
-                    margin: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      border: Border.all(width: 1, color: Colors.white),
-                      borderRadius: const BorderRadius.all(Radius.circular(10)),
+                  padding: EdgeInsets.all(20),
+                  margin: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          Colors.grey,
+                          Colors.white30,
+                        ]),
+                    border: Border.all(width: 1, color: Colors.black87),
+                    borderRadius: const BorderRadius.all(Radius.circular(10)),
+                  ),
+                  child: const Expanded(
+                    child: Text(
+                      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. "
+                      "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, "
+                      "when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                      " It has survived not only five centuries, but also the leap into electronic typesetting, "
+                      "remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset "
+                      "sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like "
+                      "Aldus PageMaker including versions of Lorem Ipsum.",
+                      style: TextStyle(
+                          fontSize: 21,
+                          color: Colors.black,
+                          fontFamily: "Philosopher-Regular"),
                     ),
-                    child: const Text("")),
+                  ),
+                ),
+                SizedBox(
+                    width: 10,
+                    child: IconButton(
+                        onPressed: () {}, icon: Icon(Icons.copy_rounded)))
               ],
             ),
           ),

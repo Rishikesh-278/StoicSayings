@@ -14,7 +14,7 @@ class Authentication
         {
           if(snapshot.hasData)
           {
-            return const Home();
+            return Home();
           }
           else
           {

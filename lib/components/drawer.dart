@@ -12,7 +12,6 @@ class drawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Color(0xFF141414),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
