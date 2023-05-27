@@ -23,7 +23,7 @@ class Authentication
         }
     );
   }
-
+  
   SignInWithGoogle()
   async {
     final GoogleSignInAccount? googleUser = await GoogleSignIn(

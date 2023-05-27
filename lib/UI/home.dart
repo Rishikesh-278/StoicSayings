@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stoicsayings/components/drawer.dart';
 import 'package:http/http.dart' as http;
@@ -18,7 +19,7 @@ class Home extends StatelessWidget {
           appBar: AppBar(
             title: const Text(
               "HomePage",
-              style: TextStyle(fontSize: 30),
+              style: TextStyle(fontSize: 20),
             ),
             centerTitle: true,
             elevation: 0,
@@ -56,20 +57,17 @@ class Home extends StatelessWidget {
                         end: Alignment.bottomRight,
                         colors: [
                           Colors.grey,
-                          Colors.white30,
+                          Colors.grey,
                         ]),
                     border: Border.all(width: 1, color: Colors.black87),
                     borderRadius: const BorderRadius.all(Radius.circular(10)),
                   ),
                   child: const Expanded(
-                    child: Text(
-                      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. "
-                      "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, "
-                      "when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                      " It has survived not only five centuries, but also the leap into electronic typesetting, "
-                      "remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset "
-                      "sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like "
-                      "Aldus PageMaker including versions of Lorem Ipsum.",
+                    child: SelectableText(
+                      "That’s why the philosophers warn us not to be satisfied with mere learning,"
+                          " but to add practice and then training. For as time passes we forget what "
+                          "we learned and end up doing the opposite, and hold opinions the opposite "
+                          "of what we should. – Epictetus,",
                       style: TextStyle(
                           fontSize: 21,
                           color: Colors.black,
@@ -77,10 +75,13 @@ class Home extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
-                    width: 10,
-                    child: IconButton(
-                        onPressed: () {}, icon: Icon(Icons.copy_rounded)))
+                Row(
+                  children: [
+                    IconButton(
+                        onPressed: () {}, icon: Icon(Icons.copy_rounded)),
+                    IconButton(onPressed: () {}, icon: Icon(Icons.download))
+                  ],
+                )
               ],
             ),
           ),

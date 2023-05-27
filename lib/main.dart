@@ -23,8 +23,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        fontFamily: "WorkSans",
         useMaterial3: true,
+        fontFamily: "WorkSans",
         brightness: Brightness.dark,
       ),
       home: Authentication().handleAuthState(),
